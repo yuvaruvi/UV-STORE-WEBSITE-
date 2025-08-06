@@ -1,0 +1,457 @@
+```jsx
+import React, { useState, useEffect } from "react";
+
+const App = () => {
+  const [activePage, setActivePage] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [chatbotOpen, setChatbotOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    { sender: 'bot', text: 'Hi! How can I help you today? You can ask about products, shipping, or order tracking.' }
+  ]);
+  const [chatInput, setChatInput] = useState('');
+  const [emailSubscribed, setEmailSubscribed] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+
+  // Mock data
+  const products = [
+    {
+      id: 1,
+      name: "Hustle Hard",
+      price: 29.99,
+      type: "t-shirt",
+      image: "https://placehold.co/400x500/fbbf24/1f2937?text=Hustle+Hard",
+      featured: true,
+      new: false
+    },
+    {
+      id: 2,
+      name: "Dream Chaser",
+      price: 34.99,
+      type: "hoodie",
+      image: "https://placehold.co/400x500/facc15/1f2937?text=Dream+Chaser",
+      featured: true,
+      new: true
+    },
+    {
+      id: 3,
+      name: "Grind Never Stops",
+      price: 27.99,
+      type: "t-shirt",
+      image: "https://placehold.co/400x500/fde68a/1f2937?text=Grind+Never+Stops",
+      featured: false,
+      new: false
+    },
+    {
+      id: 4,
+      name: "Mindset Matters",
+      price: 36.99,
+      type: "hoodie",
+      image: "https://placehold.co/400x500/fde047/1f2937?text=Mindset+Matters",
+      featured: true,
+      new: false
+    },
+    {
+      id: 5,
+      name: "Stay Hungry",
+      price: 28.99,
+      type: "t-shirt",
+      image: "https://placehold.co/400x500/fcd34d/1f2937?text=Stay+Hungry",
+      featured: false,
+      new: true
+    },
+    {
+      id: 6,
+      name: "Future Builder",
+      price: 38.99,
+      type: "hoodie",
+      image: "https://placehold.co/400x500/fbbf24/1f2937?text=Future+Builder",
+      featured: false,
+      new: false
+    },
+    {
+      id: 7,
+      name: "Late Night Grind",
+      price: 31.99,
+      type: "t-shirt",
+      image: "https://placehold.co/400x500/facc15/1f2937?text=Late+Night+Grind",
+      featured: false,
+      new: true
+    },
+    {
+      id: 8,
+      name: "No Days Off",
+      price: 35.99,
+      type: "hoodie",
+      image: "https://placehold.co/400x500/fde68a/1f2937?text=No+Days+Off",
+      featured: false,
+      new: false
+    }
+  ];
+
+  const reviews = [
+    { name: "Alex T.", text: "The quality is incredible! I wear my hoodie every day to class and it always gets compliments.", rating: 5 },
+    { name: "Samira K.", text: "Finally found clothing that speaks my language. The 'Hustle Hard' tee is my favorite.", rating: 5 },
+    { name: "Jordan P.", text: "Perfect fit and the designs are so relatable. Shipping was faster than expected!", rating: 4 }
+  ];
+
+  const instagramPosts = [
+    "https://placehold.co/200x200/fbbf24/1f2937?text=UV+1",
+    "https://placehold.co/200x200/facc15/1f2937?text=UV+2",
+    "https://placehold.co/200x200/fde68a/1f2937?text=UV+3",
+    "https://placehold.co/200x200/fde047/1f2937?text=UV+4",
+    "https://placehold.co/200x200/fcd34d/1f2937?text=UV+5",
+    "https://placehold.co/200x200/fbbf24/1f2937?text=UV+6"
+  ];
+
+  const faqs = [
+    {
+      question: "What are your shipping times?",
+      answer: "We ship worldwide! Domestic orders arrive in 3-5 business days, international in 7-14 days. All orders are processed within 1-2 business days."
+    },
+    {
+      question: "How do I choose the right size?",
+      answer: "Check our size guide below each product. We recommend sizing up if you prefer a looser fit, especially for hoodies. Our garments are pre-shrunk for lasting quality."
+    },
+    {
+      question: "What's your return policy?",
+      answer: "We offer 30-day returns for unused items in original condition. Just contact us within 30 days of delivery for a return label. Refunds are processed within 5-7 business days."
+    },
+    {
+      question: "How are your products made?",
+      answer: "We use premium cotton blends and eco-friendly printing methods. Every piece is quality checked before shipping. Our hoodies feature double-lined hoods and reinforced stitching."
+    },
+    {
+      question: "Do you offer student discounts?",
+      answer: "Yes! We offer 15% off for students with a valid student ID. Email us your ID to receive a discount code."
+    }
+  ];
+
+  const filteredProducts = selectedCategory === 'all' 
+    ? products 
+    : products.filter(product => product.type === selectedCategory);
+
+  const handleChatSubmit = (e) => {
+    e.preventDefault();
+    if (chatInput.trim()) {
+      const userMessage = { sender: 'user', text: chatInput };
+      setChatMessages([...chatMessages, userMessage]);
+      
+      // Simple AI responses
+      let botResponse = '';
+      const lowerInput = chatInput.toLowerCase();
+      
+      if (lowerInput.includes('shipping') || lowerInput.includes('deliver')) {
+        botResponse = "We offer fast shipping worldwide! Domestic orders arrive in 3-5 business days, international in 7-14 days. Expedited options are available at checkout.";
+      } else if (lowerInput.includes('return') || lowerInput.includes('exchange')) {
+        botResponse = "You can return unused items within 30 days of delivery. We'll provide a return label and process your refund quickly once we receive the item.";
+      } else if (lowerInput.includes('track') || lowerInput.includes('order')) {
+        botResponse = "To track your order, please provide your order number. You can find this in your confirmation email.";
+      } else if (lowerInput.includes('size') || lowerInput.includes('fit')) {
+        botResponse = "We recommend checking our size guide on each product page. For a relaxed fit, especially with hoodies, consider sizing up one size.";
+      } else if (lowerInput.includes('payment')) {
+        botResponse = "We accept all major credit cards, PayPal, and Apple Pay. Your payment information is securely encrypted.";
+      } else if (lowerInput.includes('discount') || lowerInput.includes('student')) {
+        botResponse = "We offer 15% off for students with a valid student ID. Email us your ID to receive a discount code.";
+      } else {
+        botResponse = "Thanks for your message! For specific questions about shipping, returns, or orders, I can help you find the information you need.";
+      }
+      
+      setTimeout(() => {
+        setChatMessages(prev => [...prev, { sender: 'bot', text: botResponse }]);
+      }, 1000);
+      
+      setChatInput('');
+    }
+  };
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (newsletterEmail && /\S+@\S+\.\S+/.test(newsletterEmail)) {
+      setEmailSubscribed(true);
+      setTimeout(() => setEmailSubscribed(false), 3000);
+      setNewsletterEmail('');
+    }
+  };
+
+  const Navigation = () => (
+    <nav className="bg-white text-gray-900 shadow-sm border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
+          <div className="flex items-center">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+              UV ONLINE STORE
+            </h1>
+          </div>
+          
+          <div className="hidden md:flex space-x-8">
+            {['home', 'shop', 'about', 'philosophy', 'contact', 'faq'].map((page) => (
+              <button
+                key={page}
+                onClick={() => setActivePage(page)}
+                className={`capitalize font-medium transition-colors duration-200 ${
+                  activePage === page 
+                    ? 'text-yellow-600' 
+                    : 'text-gray-700 hover:text-yellow-600'
+                }`}
+              >
+                {page === 'philosophy' ? 'Design Philosophy' : page}
+              </button>
+            ))}
+          </div>
+
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-yellow-600 focus:outline-none"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {['home', 'shop', 'about', 'philosophy', 'contact', 'faq'].map((page) => (
+                <button
+                  key={page}
+                  onClick={() => {
+                    setActivePage(page);
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-yellow-600 capitalize"
+                >
+                  {page === 'philosophy' ? 'Design Philosophy' : page}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+
+  const Hero = () => (
+    <div className="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            ELEVATE YOUR
+            <span className="block bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+              STYLE
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Premium printed T-shirts and hoodies designed for the modern hustler. Quality that lasts, designs that inspire.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              onClick={() => setActivePage('shop')}
+              className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+            >
+              Shop Now
+            </button>
+            <button
+              onClick={() => setActivePage('philosophy')}
+              className="border-2 border-yellow-500 text-yellow-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-50 transition-colors duration-200"
+            >
+              Our Philosophy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const FeaturedProducts = () => (
+    <div className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Collections</h2>
+          <p className="text-xl text-gray-600">Premium quality, meaningful designs</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.filter(p => p.featured).map((product) => (
+            <div key={product.id} className="bg-gray-50 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="relative">
+                {product.new && (
+                  <span className="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    NEW
+                  </span>
+                )}
+                <img src={product.image} alt={product.name} className="w-full h-80 object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4 capitalize">{product.type}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-gray-900">${product.price}</span>
+                  <button className="bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-black transition-colors duration-200">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const ShopPage = () => (
+    <div className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Collection</h2>
+          <p className="text-xl text-gray-600">Choose your statement piece</p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {['all', 't-shirt', 'hoodie'].map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-3 rounded-full font-medium capitalize transition-all duration-200 ${
+                selectedCategory === category
+                  ? 'bg-yellow-500 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="relative">
+                {product.new && (
+                  <span className="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    NEW
+                  </span>
+                )}
+                <img src={product.image} alt={product.name} className="w-full h-80 object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4 capitalize">{product.type}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-gray-900">${product.price}</span>
+                  <button className="bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-black transition-colors duration-200">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const AboutPage = () => (
+    <div className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+            <p className="text-lg text-gray-700 mb-6">
+              UV Online Store began in a small apartment with a simple mission: to create clothing that resonates with the authentic experiences of young adults, students, and hustlers.
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              What started as a passion project with support from close friends and family has grown into a movement. We're not just selling clothes—we're building a community for the next generation of dreamers and doers.
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              Every design is born from real-life moments—the late-night study sessions, the first internship, the challenges of balancing work and school. We believe your clothing should reflect your journey.
+            </p>
+            <button className="bg-yellow-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-yellow-600 transition-colors duration-200">
+              Join the Movement
+            </button>
+          </div>
+          <div>
+            <img src="https://placehold.co/600x400/fde68a/1f2937?text=Our+Journey" alt="Our Story" className="rounded-lg shadow-lg" />
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">Our Values</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Authenticity",
+                description: "Every design comes from real experiences and genuine emotions. No empty slogans—just truth that resonates."
+              },
+              {
+                title: "Quality",
+                description: "Premium materials and craftsmanship. We believe your mindset deserves clothing that lasts."
+              },
+              {
+                title: "Community",
+                description: "We're building more than a brand—we're creating a movement of like-minded individuals supporting each other's growth."
+              }
+            ].map((value, index) => (
+              <div key={index} className="bg-gray-50 p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{value.title}</h3>
+                <p className="text-gray-700">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const PhilosophyPage = () => (
+    <div className="py-16 bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+              Design Philosophy
+            </span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Our designs aren't just graphics—they're reflections of the raw, unfiltered journey of youth, ambition, and self-discovery
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <img src="https://placehold.co/600x400/fde047/1f2937?text=Design+Process" alt="Design Process" className="rounded-lg" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold mb-6">Real Experiences, Real Designs</h3>
+            <p className="text-lg text-gray-300 mb-6">
+              Every design begins with a story—late nights studying, the anxiety before a big presentation, 
+              the triumph of landing your first internship, the loneliness of being far from home.
+            </p>
+            <p className="text-lg text-gray-300 mb-6">
+              We believe clothing should be more than fabric. It should be a reminder of where you've been, 
+              where you're going, and the strength you carry within.
+            </p>
+            <p className="text-lg text-gray-300">
+              Our team spends months developing each collection, ensuring every piece resonates with the 
+              authentic experiences of young adults navigating school, work, and life. From concept to print, 
+              we maintain the highest standards of quality and meaning.
+            </p>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+            Be the Change
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const ContactPage = () => (
+    <div className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       
