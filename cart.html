@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cart — UV STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></a>
+      <nav class="nav"><a href="index.html">Home</a><a href="products.html">Shop</a></nav>
+    </div>
+  </header>
+
+  <main class="container main-grid cart-page">
+    <section>
+      <h2 class="section-title">Your Cart</h2>
+      <div id="cart-container" class="cart-container">
+        <!-- cart content injected by cart.js -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><div class="brand small"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></div></div>
+      <div class="footer-col"><h4>Support</h4><a href="contact.html">Contact</a></div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> UV STORE</div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
