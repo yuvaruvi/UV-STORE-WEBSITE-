@@ -5,18 +5,18 @@ window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   const loaderBar = document.getElementById('loader-bar');
 
-  // Animate loader bar to 100%
+  // Animate loader bar smoothly
   let width = 0;
   const loaderInterval = setInterval(() => {
     if (width >= 100) {
       clearInterval(loaderInterval);
     } else {
-      width += 5;
+      width += 2; // slower and smoother
       loaderBar.style.width = width + '%';
     }
-  }, 20);
+  }, 15);
 
-  // Fade out preloader
+  // Fade out preloader after page load
   if (preloader) {
     preloader.style.opacity = '0';
     preloader.style.pointerEvents = 'none';
@@ -47,7 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ==========================
-// Hamburger Menu Toggle (for mobile)
+// Hamburger Menu Toggle (Mobile)
 // ==========================
 const navToggle = document.getElementById('navToggle');
 const nav = document.querySelector('.nav');
@@ -60,7 +60,35 @@ if(navToggle){
 }
 
 // ==========================
-// Cart Count Update (basic hookup)
+// Search Toggle
+// ==========================
+const searchToggle = document.getElementById('searchToggle');
+if(searchToggle){
+  searchToggle.addEventListener('click', () => {
+    const searchBox = document.getElementById('searchBox');
+    if(searchBox){
+      searchBox.classList.toggle('visible');
+    }
+  });
+}
+
+// ==========================
+// Fade-in on Scroll (dynamic)
+// ==========================
+const revealOnScroll = () => {
+  const fadeIns = document.querySelectorAll('.fade-in');
+  const windowBottom = window.innerHeight + window.scrollY;
+
+  fadeIns.forEach(el => {
+    if(windowBottom > el.offsetTop + 100){
+      el.classList.add('visible');
+    }
+  });
+};
+window.addEventListener('scroll', revealOnScroll);
+
+// ==========================
+// Cart Functionality Hookup
 // ==========================
 function updateCartCount(count){
   const cartCount = document.getElementById('cart-count');
@@ -69,13 +97,33 @@ function updateCartCount(count){
   }
 }
 
-// Example: hook this with your cart.js add/remove
+// Example function to add item to cart
 window.addToCart = function(id, name, price){
-  // Call your cart.js function here
-  // e.g., Cart.addItem(id, name, price);
   console.log(`Added ${name} - ₹${price}`);
-  // Increment count visually
+  // Increment cart count
   const cartCount = document.getElementById('cart-count');
   let count = parseInt(cartCount.textContent) || 0;
   cartCount.textContent = count + 1;
+
+  // Here you can call your cart.js logic to actually store the item
+  // e.g., Cart.addItem(id, name, price);
 }
+
+// ==========================
+// Newsletter Form
+// ==========================
+const newsletterForm = document.getElementById('newsletter-form');
+if(newsletterForm){
+  newsletterForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = newsletterForm.querySelector('input[name="email"]').value;
+    console.log(`Newsletter signup: ${email}`);
+    alert('Thanks! You are signed up.');
+    newsletterForm.reset();
+  });
+}
+
+// ==========================
+// Set current year in footer
+// ==========================
+document.getElementById('year').textContent = new Date().getFullYear();
