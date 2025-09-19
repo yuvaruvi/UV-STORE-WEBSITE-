@@ -1,4 +1,4 @@
-// Products data (replace images and info with real content)
+// Products data (update images to your own)
 const PRODUCTS = [
   { id: 'p1', name: 'UV Classic Tee — Black', price: 699, img: 'assets/images/product-1.jpg', desc: '100% combed cotton, single print.'},
   { id: 'p2', name: 'UV Hustle Hoodie — Ash', price: 1299, img: 'assets/images/product-2.jpg', desc: 'Midweight fleece, comfy fit.'},
@@ -9,3 +9,6 @@ const PRODUCTS = [
   { id: 'p7', name: 'UV Overshirt', price: 1599, img: 'assets/images/product-7.jpg', desc: 'Lightweight overshirt for layering.'},
   { id: 'p8', name: 'UV Longsleeve', price: 899, img: 'assets/images/product-8.jpg', desc: 'Soft long sleeve, premium print.'}
 ];
+
+/* Exported for main.js to use (in global window) */
+window.PRODUCTS = PRODUCTS;
