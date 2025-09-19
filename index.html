@@ -3,20 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UV STORE — Premium Streetwear</title>
+  <title>UV STORE — Elevated Everyday</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#0b0b0b">
 </head>
-<body>
-  <!-- NAV -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></a>
+<body class="theme-dark">
 
-      <nav class="nav">
+  <!-- PAGE PRELOADER / GOLD LOADING BAR -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-inner">
+      <img src="logo.png" alt="UV STORE" class="preloader-logo" />
+      <div class="loader-track">
+        <div id="loader-bar" class="loader-bar"></div>
+      </div>
+      <div class="preloader-text">Curating your drop…</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="UV STORE homepage">
+        <img src="logo.png" alt="UV Logo" class="nav-logo" />
+        <span class="brand-text">UV STORE</span>
+      </a>
+
+      <nav class="nav" role="navigation" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="products.html">Shop</a>
         <a href="about.html">About</a>
@@ -25,11 +41,10 @@
 
       <div class="header-actions">
         <button id="searchToggle" class="icon-btn" aria-label="search">
-          <!-- simple svg -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
         </button>
 
-        <a href="cart.html" class="cart-link">
+        <a href="cart.html" class="cart-link" aria-label="cart">
           <svg class="cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1" fill="currentColor"/><circle cx="18" cy="20" r="1" fill="currentColor"/></svg>
           <span id="cart-count" class="cart-count">0</span>
         </a>
@@ -42,77 +57,110 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
-    <picture>
-      <img src="assets/images/hero.jpg" alt="UV STORE hero" class="hero-image">
-    </picture>
+  <section class="hero" id="hero">
+    <img src="assets/images/hero.jpg" alt="Hero" class="hero-bg" />
     <div class="hero-overlay">
-      <div class="container hero-content">
-        <h1 class="hero-title">Elevated Everyday</h1>
-        <p class="hero-sub">Limited drop — crafted cuts. Premium feels without the premium fuss.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="products.html">Shop the Drop</a>
-          <a class="btn btn-muted" href="about.html">Our Story</a>
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <h1 class="hero-title">Elevated Everyday</h1>
+          <p class="hero-sub">Curated limited drops — premium fabric, honest pricing. Designed for the hustle.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="products.html">Shop the Drop</a>
+            <a class="btn btn-ghost" href="about.html">Our Story</a>
+          </div>
+        </div>
+
+        <div class="hero-featured reveal">
+          <div class="featured-card">
+            <img src="assets/images/product-1.jpg" alt="Featured" />
+            <div class="featured-meta">
+              <div class="tag">Limited</div>
+              <div class="name">UV Classic Tee</div>
+              <div class="price">₹699</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURED -->
+  <!-- MAIN -->
   <main class="container main-grid">
-    <section class="intro">
-      <h2 class="section-title">Featured</h2>
-      <p class="lead">Selected pieces — quality fabrics, clean prints, made to last.</p>
+    <!-- Featured products -->
+    <section class="section reveal" id="featured-section">
+      <div class="section-head">
+        <h2 class="section-title">Featured</h2>
+        <p class="muted">Selected pieces — minimal, durable, made to be worn daily.</p>
+      </div>
+
+      <div id="featured-products" class="products-grid elevated">
+        <!-- JS will render product cards -->
+      </div>
     </section>
 
-    <section id="featured-products" class="products-grid">
-      <!-- cards inserted by JS -->
+    <!-- Trust strip -->
+    <section class="trust-strip reveal">
+      <div class="trust-inner">
+        <div><strong>Premium materials</strong><span>— combed cotton & fine fleece</span></div>
+        <div><strong>Free delivery</strong><span>on orders ₹1499+</span></div>
+        <div><strong>Secure checkout</strong><span>Razorpay / UPI ready</span></div>
+      </div>
     </section>
 
-    <section class="brand-strip">
+    <!-- Newsletter -->
+    <section class="newsletter reveal">
+      <div class="newsletter-inner">
+        <div class="newsletter-copy">
+          <h3>Early access & restock alerts</h3>
+          <p class="muted">Sign up and get first access to drops. No spam — just drops.</p>
+        </div>
+        <form id="newsletter-form" class="newsletter-form" aria-label="newsletter">
+          <input type="email" name="email" required placeholder="Your email" />
+          <button class="btn btn-outline" type="submit">Notify me</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Brand strip with elevated cards -->
+    <section class="brand-strip reveal">
       <div class="brand-strip-inner">
-        <div>
-          <h3>Craftsmanship</h3>
-          <p>Material-first approach, built for daily wear.</p>
+        <div class="bs-item">
+          <h4>Craftsmanship</h4>
+          <p class="muted">Material-first approach, small-run prints.</p>
         </div>
-        <div>
-          <h3>Ethical Pricing</h3>
-          <p>Pared-down overheads, no inflated margins.</p>
+        <div class="bs-item">
+          <h4>Ethical pricing</h4>
+          <p class="muted">Transparent costs — no inflated margins.</p>
         </div>
-        <div>
-          <h3>Fast Shipping</h3>
-          <p>Reliable courier partners across India.</p>
+        <div class="bs-item">
+          <h4>Fast shipping</h4>
+          <p class="muted">Courier partners across India.</p>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-col">
-        <div class="brand small">
-          <span class="brand-crest">UV</span>
-          <span class="brand-text">STORE</span>
-        </div>
-        <p class="muted">Premium printed tees & hoodies — hustle-forward designs for students & young adults.</p>
+      <div class="footer-brand">
+        <img src="logo.png" alt="UV logo" class="footer-logo" />
+        <p class="muted">Printed tees & hoodies — motivational designs for students & hustlers.</p>
       </div>
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <a href="products.html">All products</a>
-        <a href="cart.html">Cart</a>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="contact.html">Contact</a>
+      <div class="footer-links">
+        <a href="products.html">Shop</a>
         <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-social">
+        <p class="muted">© <span id="year"></span> UV STORE</p>
       </div>
     </div>
-    <div class="container copyright">© <span id="year"></span> UV STORE — All rights reserved</div>
   </footer>
 
+  <!-- Scripts -->
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
-
