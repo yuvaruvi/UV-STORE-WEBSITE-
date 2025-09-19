@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — UV STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></a>
+      <nav class="nav"><a href="index.html">Home</a><a href="products.html">Shop</a></nav>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="intro">
+      <h2 class="section-title">Contact</h2>
+      <p>Questions, collabs or print orders — drop a message.</p>
+      <form class="contact-form" id="contact-form">
+        <label>Name<input required name="name"></label>
+        <label>Email<input required type="email" name="email"></label>
+        <label>Message<textarea required name="message"></textarea></label>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><div class="footer-col"><div class="brand small"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></div></div></div>
+    <div class="container copyright">© <span id="year"></span> UV STORE</div>
+  </footer>
+
+  <script>
+    document.getElementById('contact-form')?.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Thanks! This form is currently static. Configure a backend or use Formspree/Razorpay/Netlify Forms to receive messages.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
