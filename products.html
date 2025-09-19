@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — UV STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- include same header as index (keep it DRY when you later use templating) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></a>
+      <nav class="nav"><a href="index.html">Home</a><a href="products.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      <div class="header-actions">
+        <a href="cart.html" class="cart-link"><svg class="cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1" fill="currentColor"/><circle cx="18" cy="20" r="1" fill="currentColor"/></svg><span id="cart-count" class="cart-count">0</span></a>
+        <button class="hamburger" id="navToggle" aria-label="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="intro">
+      <h2 class="section-title">Shop</h2>
+      <p class="lead">Browse all drops. Click Add to Cart to reserve — items are limited.</p>
+    </section>
+
+    <section id="products-list" class="products-grid">
+      <!-- rendered by JS -->
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div class="brand small"><span class="brand-crest">UV</span><span class="brand-text">STORE</span></div>
+        <p class="muted">Premium printed tees & hoodies.</p>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><a href="products.html">All products</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="contact.html">Contact</a></div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> UV STORE</div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
