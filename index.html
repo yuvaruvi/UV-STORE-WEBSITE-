@@ -8,25 +8,38 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Main stylesheet (keep path as css/style.css) -->
   <link rel="stylesheet" href="css/style.css">
   <meta name="theme-color" content="#0b0b0b">
+
+  <!-- Social / SEO (small set, expand later) -->
+  <meta name="description" content="UV STORE — premium streetwear drops. Limited prints, honest pricing.">
+  <meta property="og:title" content="UV STORE — Elevated Everyday">
+  <meta property="og:description" content="Premium printed tees & hoodies built for hustle.">
+  <meta property="og:image" content="assets/images/hero.jpg">
 </head>
 <body class="theme-dark">
 
-  <!-- PAGE PRELOADER / GOLD LOADING BAR -->
-  <div id="preloader" class="preloader">
-    <div class="preloader-inner">
+  <!-- =====================================
+       PRELOADER / GOLD LOADING BAR (FULLSCREEN)
+       stays until js hides it on window.load
+  ====================================== -->
+  <div id="preloader" class="preloader" aria-hidden="false" role="status">
+    <div class="preloader-inner" role="presentation">
       <img src="logo.png" alt="UV STORE" class="preloader-logo" />
-      <div class="loader-track">
-        <div id="loader-bar" class="loader-bar"></div>
+      <div class="loader-track" aria-hidden="true">
+        <div id="loader-bar" class="loader-bar" style="width:0%"></div>
       </div>
       <div class="preloader-text">Curating your drop…</div>
     </div>
   </div>
 
-  <!-- NAV -->
+  <!-- =====================================
+       SITE HEADER / NAVIGATION
+  ====================================== -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
+
       <a class="brand" href="index.html" aria-label="UV STORE homepage">
         <img src="logo.png" alt="UV Logo" class="nav-logo" />
         <span class="brand-text">UV STORE</span>
@@ -39,30 +52,33 @@
         <a href="contact.html">Contact</a>
       </nav>
 
-      <div class="header-actions">
+      <div class="header-actions" role="region" aria-label="Header actions">
         <button id="searchToggle" class="icon-btn" aria-label="search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
         </button>
 
         <a href="#cart" class="cart-link" aria-label="cart">
-          <svg class="cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1" fill="currentColor"/><circle cx="18" cy="20" r="1" fill="currentColor"/></svg>
-          <span id="cart-count" class="cart-count">0</span>
+          <svg class="cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1" fill="currentColor"/><circle cx="18" cy="20" r="1" fill="currentColor"/></svg>
+          <span id="cart-count" class="cart-count" aria-live="polite">0</span>
         </a>
 
-        <button class="hamburger" id="navToggle" aria-label="menu">
+        <button class="hamburger" id="navToggle" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
       </div>
+
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <img src="assets/images/hero.jpg" alt="Hero" class="hero-bg" />
+  <!-- =====================================
+       HERO
+  ====================================== -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <img src="assets/images/hero.jpg" alt="" class="hero-bg" aria-hidden="true" />
     <div class="hero-overlay">
       <div class="container hero-inner">
-        <div class="hero-copy fade-in">
-          <h1 class="hero-title">Elevated Everyday</h1>
+        <div class="hero-copy fade-in" id="hero-copy">
+          <h1 id="hero-heading" class="hero-title">Elevated Everyday</h1>
           <p class="hero-sub">Curated limited drops — premium fabric, honest pricing. Designed for the hustle.</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="products.html">Shop the Drop</a>
@@ -70,9 +86,9 @@
           </div>
         </div>
 
-        <div class="hero-featured fade-in">
-          <div class="featured-card">
-            <img src="assets/images/product-1.jpg" alt="Featured" />
+        <div class="hero-featured fade-in" aria-hidden="false">
+          <div class="featured-card" aria-hidden="false">
+            <img src="assets/images/product-1.jpg" alt="UV Classic Tee" />
             <div class="featured-meta">
               <div class="tag">Limited</div>
               <div class="name">UV Classic Tee</div>
@@ -84,45 +100,48 @@
     </div>
   </section>
 
-  <!-- MAIN -->
-  <main class="container main-grid">
-    <!-- Featured products -->
-    <section class="section fade-in" id="featured-section">
+  <!-- =====================================
+       MAIN CONTENT
+  ====================================== -->
+  <main class="container main-grid" id="main">
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="section fade-in" id="featured-section" aria-labelledby="featured-title">
       <div class="section-head">
-        <h2 class="section-title">Featured</h2>
+        <h2 id="featured-title" class="section-title">Featured</h2>
         <p class="muted">Selected pieces — minimal, durable, made to be worn daily.</p>
       </div>
 
-      <div id="featured-products" class="products-grid elevated">
-        <!-- JS will render product cards -->
+      <div id="featured-products" class="products-grid elevated" role="list">
+        <!-- JS will render product cards (products.js) -->
       </div>
     </section>
 
-    <!-- Trust strip -->
-    <section class="trust-strip fade-in">
+    <!-- TRUST STRIP -->
+    <section class="trust-strip fade-in" aria-hidden="false">
       <div class="trust-inner">
-        <div><strong>Premium materials</strong><span>— combed cotton & fine fleece</span></div>
-        <div><strong>Free delivery</strong><span>on orders ₹1499+</span></div>
-        <div><strong>Secure checkout</strong><span>Razorpay / UPI ready</span></div>
+        <div><strong>Premium materials</strong><span class="muted"> — combed cotton & fine fleece</span></div>
+        <div><strong>Free delivery</strong><span class="muted"> — on orders ₹1499+</span></div>
+        <div><strong>Secure checkout</strong><span class="muted"> — Razorpay / UPI ready</span></div>
       </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter fade-in">
+    <!-- NEWSLETTER -->
+    <section class="newsletter fade-in" aria-labelledby="newsletter-heading">
       <div class="newsletter-inner">
         <div class="newsletter-copy">
-          <h3>Early access & restock alerts</h3>
+          <h3 id="newsletter-heading">Early access & restock alerts</h3>
           <p class="muted">Sign up and get first access to drops. No spam — just drops.</p>
         </div>
         <form id="newsletter-form" class="newsletter-form" aria-label="newsletter">
-          <input type="email" name="email" required placeholder="Your email" />
+          <input type="email" name="email" required placeholder="Your email" aria-label="Email address" />
           <button class="btn btn-outline" type="submit">Notify me</button>
         </form>
       </div>
     </section>
 
-    <!-- Brand strip with elevated cards -->
-    <section class="brand-strip fade-in">
+    <!-- BRAND / USP STRIP -->
+    <section class="brand-strip fade-in" aria-hidden="false">
       <div class="brand-strip-inner">
         <div class="bs-item">
           <h4>Craftsmanship</h4>
@@ -139,36 +158,89 @@
       </div>
     </section>
 
-    <!-- Cart Section (upgraded) -->
-    <section id="cart" class="cart fade-in">
-      <h2>Your Cart</h2>
-      <div id="cart-items"></div>
+    <!-- TESTIMONIALS (ADDED BACK) -->
+    <section class="testimonials fade-in" aria-labelledby="testimonials-title">
+      <div class="section-head">
+        <h2 id="testimonials-title" class="section-title">What customers say</h2>
+        <p class="muted">Real feedback from early drops.</p>
+      </div>
+
+      <div class="testimonial-grid">
+        <blockquote class="testimonial-card">
+          <p>"Great fit and the print quality is top-notch. Packaging felt premium." — Ananya</p>
+        </blockquote>
+        <blockquote class="testimonial-card">
+          <p>"Fast delivery and the hoodie is super warm. Worth every rupee." — Rahul</p>
+        </blockquote>
+        <blockquote class="testimonial-card">
+          <p>"Loved how the tee feels. Minimal design, big impact." — Priya</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ (ADDED BACK) -->
+    <section class="faq fade-in" aria-labelledby="faq-title">
+      <div class="section-head">
+        <h2 id="faq-title" class="section-title">FAQ</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>What is the material used?</summary>
+          <p class="muted">We primarily use combed cotton and midweight fleece for hoodies.</p>
+        </details>
+        <details>
+          <summary>How long is shipping?</summary>
+          <p class="muted">Shipping within India: 3–7 business days depending on location.</p>
+        </details>
+        <details>
+          <summary>Can I return or exchange?</summary>
+          <p class="muted">Yes — returns accepted within 7 days of delivery. Read full policy on the About page.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CART (INLINE PREVIEW) -->
+    <section id="cart" class="cart fade-in" aria-labelledby="cart-title">
+      <h2 id="cart-title">Your Cart</h2>
+      <div id="cart-items" aria-live="polite"></div>
       <p id="cart-total">Total: ₹0</p>
+      <div style="margin-top:14px;">
+        <a class="btn btn-primary" href="checkout.html">Proceed to Checkout</a>
+      </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer fade-in">
+  <!-- =====================================
+       FOOTER
+  ====================================== -->
+  <footer class="site-footer fade-in" role="contentinfo">
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="logo.png" alt="UV logo" class="footer-logo" />
         <p class="muted">Printed tees & hoodies — motivational designs for students & hustlers.</p>
       </div>
+
       <div class="footer-links">
         <a href="products.html">Shop</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
+
       <div class="footer-social">
         <p class="muted">© <span id="year"></span> UV STORE</p>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- =====================================
+       SCRIPTS
+       (make sure these files exist at paths)
+  ====================================== -->
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- End body -->
 </body>
 </html>
